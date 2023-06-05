@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kemsis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!--BOOSTRAP-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+</head>
+<body>
+    <div class="modal fade" id="popupModal" tabindex="-1" role="dialog" aria-labelledby="popupModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="popupModalLabel">{{ modal_title }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>{{ modal_message }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content flex">
+        <div class="content__sub flex">
+            <div class="judul">
+                <h1>RSA dan LSB</h1>
+            </div>
+
+        
+            {% if decrypted_text %}
+            <div class="hasil flex">
+                <h3>Decrypted Text:</h3>
+                <p>{{ decrypted_text }}</p>
+            </div>
+            {% endif %}
+        
+            <form action="/" method="post" enctype="multipart/form-data">
+                <div class="halaman grid">    
+                    <div class="select_image flex">
+                        <label for="file"> <h5>Upload gambar</h5></label>
+                        <input type="file" id="file" name="file" accept="image/*"><br><br>
+                    </div>
+                    <div class="input flex">
+                        <label for="plaintext">Plaintext:</label>
+                        <input type="text" id="plaintext" name="plaintext"><br><br>
+                    </div>
+                    <div class="button flex">
+                        <input class="button_submit" type="submit" name="encrypt" value="Encrypt">
+                        <input class="button_submit" type="submit" name="decrypt" value="Decrypt">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        {% if error %}
+            // Tampilkan popup dengan pesan error
+            $('#popupModalLabel').text('Error');
+            $('#popupModal .modal-body p').text('{{ error }}');
+            $('#popupModal').modal('show');
+        {% endif %}
+
+        {% if message %}
+            // Tampilkan popup dengan pesan message
+            $('#popupModalLabel').text('Message');
+            $('#popupModal .modal-body p').text('{{ message }}');
+            $('#popupModal').modal('show');
+        {% endif %}
+    </script>
+</body>
+</html>
