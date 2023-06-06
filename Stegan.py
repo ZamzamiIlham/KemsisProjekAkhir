@@ -29,7 +29,7 @@ def Encode(img, msg, lst):
     return encoded_img
 
 
-# Decode function of Steganography
+# mendecode stegano
 
 def Decode(img):
     global L

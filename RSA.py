@@ -60,10 +60,10 @@ def Decrypt(img):
 def home():
     if request.method == 'POST':
         if 'file' not in request.files:
-            return render_template('index.html', error='No file selected')
+            return render_template('index.html', error='Tidak ada file yang dipilih')
         file = request.files['file']
         if file.filename == '':
-            return render_template('index.html', error='No file selected')
+            return render_template('index.html', error='Tidak ada file yang dipilih')
 
         original_image = Image.open(file)
         plaintext = request.form['plaintext']
